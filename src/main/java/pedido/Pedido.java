@@ -32,7 +32,6 @@ public class Pedido {
     public double calcularTotal(Cardapio cardapio) {
         double total = 0;
         double parcial = 0;
-        System.out.println("CARDÁPIO LKZ: " + cardapio);
         for (ItemPedido itemPedido : itens) {
             if (itemPedido.getShake() != null) {
                 if (itemPedido.getShake().getBase() != null) {
@@ -65,34 +64,36 @@ public class Pedido {
     }
 
     public void adicionarItemPedido(ItemPedido itemPedidoAdicionado) {
+        boolean itemExists = false;
         if (itemPedidoAdicionado != null) {
-            if (this.itens.contains(itemPedidoAdicionado)) {
-                if (this.itens.get(this.itens.indexOf(itemPedidoAdicionado)).getShake().equals(itemPedidoAdicionado.getShake())) {
-                    this.itens.get(itens.indexOf(itemPedidoAdicionado))
-                            .setQuantidade(this.itens.get(this.itens.indexOf(itemPedidoAdicionado)).getQuantidade() + itemPedidoAdicionado.getQuantidade());
+            for (ItemPedido itemPedido : this.itens) {
+                if (itemPedido.getShake().equals(itemPedidoAdicionado.getShake())) {
+                    itemPedido.setQuantidade(itemPedido.getQuantidade() + itemPedidoAdicionado.getQuantidade());
+                    itemExists = true;
                 }
-            } else {
+            }
+            if (!itemExists) {
                 this.itens.add(itemPedidoAdicionado);
             }
         }
     }
 
+
     public boolean removeItemPedido(ItemPedido itemPedidoRemovido) {
         if (itemPedidoRemovido != null) {
             if (!this.itens.isEmpty()) {
-                if (this.itens.contains(itemPedidoRemovido) && this.itens.get(this.itens.indexOf(itemPedidoRemovido)).getQuantidade() > 1) {
-                    this.itens.get(itens.indexOf(itemPedidoRemovido))
-                            .setQuantidade(this.itens.get(this.itens.indexOf(itemPedidoRemovido)).getQuantidade() - 1);
-                } else if (this.itens.contains(itemPedidoRemovido) && itemPedidoRemovido.getQuantidade() < this.itens.get(this.itens.indexOf(itemPedidoRemovido)).getQuantidade()) {
-                    this.itens.get(itens.indexOf(itemPedidoRemovido))
-                            .setQuantidade(this.itens.get(this.itens.indexOf(itemPedidoRemovido)).getQuantidade() - itemPedidoRemovido.getQuantidade());
-                } else if (this.itens.contains(itemPedidoRemovido)) {
-                    this.itens.remove(itemPedidoRemovido);
-                } else {
-                    throw new IllegalArgumentException("Item nao existe no pedido.");
+                for (ItemPedido itemPedido : this.itens) {
+                    if (itemPedido.getShake().toString().equals(itemPedidoRemovido.getShake().toString())) {
+                        if (itemPedido.getQuantidade() > 1) {
+                            itemPedido.setQuantidade(itemPedido.getQuantidade() - 1);
+                        } else {
+                            this.itens.remove(itemPedido);
+                        }
+                        break;
+                    } else {
+                        throw new IllegalArgumentException("Item nao existe no pedido.");
+                    }
                 }
-            } else {
-                throw new IllegalArgumentException("Item nao existe no pedido.");
             }
         }
         return false;
