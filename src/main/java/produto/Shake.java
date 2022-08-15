@@ -6,8 +6,8 @@ import ingredientes.Fruta;
 import ingredientes.Topping;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Shake {
     private Base base;
@@ -20,7 +20,7 @@ public class Shake {
         this.base = base;
         this.fruta = fruta;
         this.topping = topping;
-        this.adicionais = adicionais;
+        this.adicionais = adicionais.stream().sorted().collect(Collectors.toList());
         this.tipoTamanho = tipoTamanho;
     }
 
@@ -45,13 +45,6 @@ public class Shake {
     }
 
     public List<Adicional> getAdicionais() {
-        adicionais.sort(new Comparator<Adicional>() {
-            @Override
-            public int compare(Adicional o1, Adicional o2) {
-                return o1.obterTipo().toString().compareToIgnoreCase(o2.obterTipo().toString());
-            }
-        });
-
         return adicionais;
     }
 
