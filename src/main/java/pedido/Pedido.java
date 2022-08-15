@@ -1,6 +1,9 @@
 package pedido;
 
+import ingredientes.Adicional;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class Pedido{
 
