@@ -1,9 +1,6 @@
 package produto;
 
-import ingredientes.Adicional;
-import ingredientes.Base;
-import ingredientes.Fruta;
-import ingredientes.Topping;
+import ingredientes.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +28,7 @@ public class Shake {
         this.adicionais = new ArrayList<>();
         this.tipoTamanho = tipoTamanho;
     }
+
 
     public Base getBase() {
         return base;

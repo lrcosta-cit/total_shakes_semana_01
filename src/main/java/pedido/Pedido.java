@@ -1,31 +1,28 @@
 package pedido;
 
-import ingredientes.Adicional;
-
 import java.util.ArrayList;
-import java.util.List;
 
-public class Pedido {
+public class Pedido{
 
     private int id;
-    private ArrayList<ItemPedido> itens;
+    private  ArrayList<ItemPedido> itens;
     private Cliente cliente;
 
-    public Pedido(int id, ArrayList<ItemPedido> itens, Cliente cliente) {
+    public Pedido(int id, ArrayList<ItemPedido> itens,Cliente cliente){
         this.id = id;
-        this.itens = itens;
-        this.cliente = cliente;
+        this.itens=itens;
+        this.cliente=cliente;
     }
 
     public ArrayList<ItemPedido> getItens() {
         return itens;
     }
 
-    public int getId() {
+    public int getId(){
         return this.id;
     }
 
-    public Cliente getCliente() {
+    public Cliente getCliente(){
         return this.cliente;
     }
 
@@ -95,6 +92,7 @@ public class Pedido {
                     }
                 }
             }
+
         }
         return false;
     }
